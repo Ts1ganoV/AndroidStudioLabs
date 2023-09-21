@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/backWind"
+    tools:context=".Settings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            style="@style/zagText"
+            android:background="#63519F"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Настройки"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/Text"
+                android:id="@+id/editText"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="20dp"
+                android:text="Темная тема"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            <Switch
+                android:id="@+id/switcher"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="112dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintLeft_toRightOf="@id/editText"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                style = "@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="10dp"
+                android:text="Текущий ник: "
+                />
+            <TextView
+                style = "@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id = "@+id/tekNik"
+                android:layout_gravity="center"
+                android:layout_marginLeft="112dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/inputPlayerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Введите имя пользователя"
+                app:layout_constraintHorizontal_bias="0.105"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></EditText>
+
+            <Button
+                android:id="@+id/saveLoginBut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cохранить"
+                android:textSize="14dp"
+                android:layout_marginLeft="30dp"
+                android:onClick="clickSaveButton"
+                tools:layout_editor_absoluteX="268dp"
+                tools:layout_editor_absoluteY="0dp">
+
+            </Button>
+        </LinearLayout>
+
+        <Button
+                android:layout_gravity="center"
+                android:id="@+id/returnMainMenuBut"
+                android:layout_width="wrap_content"
+                android:onClick="returnMainMenuFunct"
+                android:text="Назад"
+                android:layout_height="wrap_content"></Button>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
