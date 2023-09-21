@@ -1,6 +1,10 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Dialog;
+import android.graphics.Color;
+import android.view.Window;
 import android.widget.AdapterView.OnItemClickListener;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +23,7 @@ public class StartGame extends AppCompatActivity {
     private GridView mGrid;
     private GridAdapter mAdapter;
 
-    int GRID_SIZE = 4 ;
+    int GRID_SIZE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,8 @@ public class StartGame extends AppCompatActivity {
         mChronometer =findViewById(R.id.playTime);
         mChronometer.setBase(SystemClock.elapsedRealtime());
         mChronometer.start();
+
+        GRID_SIZE = PoleSize.getInstance().getIntSize();
 
         mGrid = (GridView)findViewById(R.id.gridView);
         mGrid.setNumColumns(GRID_SIZE);
@@ -44,8 +51,10 @@ public class StartGame extends AppCompatActivity {
                 mAdapter.openCell (position);
 
                 if (mAdapter.checkGameOver()) {
-                    Toast.makeText(getApplicationContext(), "Игра закончена", Toast.LENGTH_SHORT).show();
+                    int c = mAdapter.getInvoice();
+                    Toast.makeText(getApplicationContext(), "Cчет: " + c, Toast.LENGTH_SHORT).show();
                     mChronometer.stop();
+                    mAdapter.setInvoice(0);
                 }
             }
         });
@@ -58,6 +67,8 @@ public class StartGame extends AppCompatActivity {
             TextView playerNameTextView = findViewById(R.id.playerName);
             playerNameTextView.setText("NoName");
         }
+
+
     }
 
     public void returnMainMenu(View view){

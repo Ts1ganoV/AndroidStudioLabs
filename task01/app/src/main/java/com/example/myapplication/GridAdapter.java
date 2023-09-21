@@ -17,11 +17,12 @@ class GridAdapter extends BaseAdapter
     private ArrayList<String> arrPict; // массив картинок
     private String PictureCollection; // Префикс набора картинок
     private Resources mRes; // Ресурсы приложени
-
+    private int invoice;
     public void resetGame() {
         closeAllCells(); // Сбросить состояние ячеек
         makePictArray(); // Пересоздать массив картинок
         notifyDataSetChanged(); // Обновить отображение
+        this.invoice = 0;
     }
 
     private static enum Status {CELL_OPEN, CELL_CLOSE, CELL_DELETE};
@@ -34,9 +35,10 @@ class GridAdapter extends BaseAdapter
         mRows = rows;
         arrPict = new ArrayList<String>();
         arrStatus = new ArrayList<Status>();
+        this.invoice = 0;
 
         // Пока определяем префикс так, позже он будет браться из настроек
-        PictureCollection = "animal";
+        PictureCollection = IconClass.getInstance().getIconPrefix();
 
         // Получаем все ресурсы приложения
         mRes = mContext.getResources();
@@ -135,6 +137,7 @@ class GridAdapter extends BaseAdapter
             arrStatus.set(position, Status.CELL_OPEN);
 
         notifyDataSetChanged();
+        invoice++;
         return;
     }
 
@@ -143,4 +146,8 @@ class GridAdapter extends BaseAdapter
             return true;
         return false;
     }
+
+    public int getInvoice(){return this.invoice;}
+    void setInvoice(int invoice){this.invoice = invoice;}
+
 }

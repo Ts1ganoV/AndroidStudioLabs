@@ -6,17 +6,27 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.http.SslCertificate;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class Settings extends AppCompatActivity {
     Switch switcher;
+    String[] item = {"2","4"};
+    String[] itemIcon = {"animal", "robot"};
+    AutoCompleteTextView autoCompleteTextView;
+    ArrayAdapter<String> adapterItems;
+
+    AutoCompleteTextView autoCompleteIconView;
+    ArrayAdapter<String> adapterIcon;
     boolean nightMode;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -29,6 +39,28 @@ public class Settings extends AppCompatActivity {
         TextView tekNik = findViewById(R.id.tekNik);
         String playerName = DataManager.getInstance().getPlayerName();
         tekNik.setText(playerName);
+
+        autoCompleteTextView = findViewById(R.id.auto_complete_txt);
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, item);
+        autoCompleteTextView.setAdapter(adapterItems);
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                PoleSize.getInstance().setSize(item);
+            }
+        });
+
+        autoCompleteIconView = findViewById(R.id.autoIcon);
+        adapterIcon = new ArrayAdapter<String>(this, R.layout.list_item, itemIcon);
+        autoCompleteIconView.setAdapter(adapterIcon);
+        autoCompleteIconView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                IconClass.getInstance().setIconPrefix(item);
+            }
+        });
 
         switcher = findViewById(R.id.switcher);
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
@@ -78,5 +110,6 @@ public class Settings extends AppCompatActivity {
         TextView tekNik = findViewById(R.id.tekNik);
         tekNik.setText(login);
     }
+
 
 }
